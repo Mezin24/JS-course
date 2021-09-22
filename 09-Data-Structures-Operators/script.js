@@ -12,9 +12,8 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
   order(starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]]
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
-
 
   openingHours: {
     thu: {
@@ -31,10 +30,9 @@ const restaurant = {
     },
   },
   orderPasta(ing1, ing2, ing3) {
-    console.log(`Here is your pasta with ${ing1}, ${ing2}, ${ing3}`)
-  }
+    console.log(`Here is your pasta with ${ing1}, ${ing2}, ${ing3}`);
+  },
 };
-
 
 /*
 
@@ -131,6 +129,127 @@ const game = {
   },
 };
 
+/*
+///////////////////////////////////////
+// Coding Challenge #3
+
+
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+// 1
+const events = [...new Set([...gameEvents.values()])];
+console.log(events);
+
+// 2
+console.log(gameEvents);
+gameEvents.delete(64);
+console.log(gameEvents);
+
+// 3
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+
+// 4
+for (let [time, event] of gameEvents) {
+  console.log(
+    `${time <= 45 ? '[FIRST HALF]' : '[SECOND HALF]'} ${time}: ${event}`
+  );
+}
+
+
+// MAPs
+const quezze = new Map([
+  ['question', "What's the best langauge?"],
+  [1, 'C++'],
+  [2, 'PhP'],
+  [3, 'JS'],
+  ['answer', 3],
+  [true, 'correct'],
+  [false, 'wrong answer!'],
+]);
+console.log(quezze.get('question'));
+const answer = +prompt('Yor answer?');
+
+for (let [key, value] of quezze.entries()) {
+  if (typeof key === 'number') {
+    console.log(value);
+  }
+}
+
+console.log(quezze.get(quezze.get('answer') === answer));
+console.log(quezze);
+
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firemze, Italy');
+rest.set(2, 'Lisbon, Portugal');
+rest
+  .set('categories', [1, 2, 3])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'we are closed');
+console.log(rest);
+console.log(rest.get(true));
+console.log(rest.get(1));
+
+const time = 21;
+console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+console.log(rest.has('categories'));
+rest.delete('categories');
+console.log(rest.has('categories'));
+console.log(rest.size);
+rest.clear();
+console.log(rest.size);
+
+
+// SETS
+const orderSet = new Set(['pizza', 'pasta', 'pizza', 'rizotto', 'pasta']);
+
+console.log(orderSet.size);
+console.log(orderSet.has('pizza'));
+console.log(orderSet.has('bread'));
+orderSet.add('garlic').add('garlic');
+console.log(orderSet);
+orderSet.delete('pizza');
+console.log(orderSet);
+orderSet.clear();
+console.log(orderSet);
+for (let order of orderSet) {
+  console.log(order);
+}
+orderSet.forEach(order => console.log(order));
+const staff = ['waiter', 'chef', 'waiter', 'manager', 'chef', 'waiter'];
+console.log([...new Set(staff)]);
+console.log(new Set(staff).size);
+console.log(new Set('Hello my friends, it is an absolutly perfect').size);
+console.log(new Set('Pavel Mezencev').size);
+
+
 ///////////// CHALLENGE 2
 // 1
 for (let [i, name] of game.scored.entries()) {
@@ -156,7 +275,7 @@ for (let [key, value] of game.scored.entries()) {
 }
 console.log(scorers)
 
-/*
+
 // 1
 const [players1, players2] = game.players;
 
@@ -279,4 +398,3 @@ const [i, , [j, k]] = nested;
 const [p, q, r = 10] = [8, 9];
 console.log(p, q, r)
 */
-
