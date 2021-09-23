@@ -13,7 +13,8 @@ const currentLabel1 = document.querySelector('#current--1');
 
 const dice = document.querySelector('.dice');
 
-let currentScore, currentPlayer, score0, score1, isOver;
+let currentScore, currentPlayer, score0, score1, isOver, scores;
+
 
 function startGame() {
   score0 = 0;
@@ -21,14 +22,17 @@ function startGame() {
   currentScore = 0;
   currentPlayer = 0;
   isOver = false;
-
+  scores = [0, 0]
+  
   player0.classList.remove('player--winner');
   player1.classList.remove('player--winner');
-
+  
   scoreLabel0.textContent = 0;
   scoreLabel1.textContent = 0;
   currentLabel0.textContent = 0;
   currentLabel1.textContent = 0;
+  // dice.classList.add('hidden');
+  dice.style.display = 'none'
 }
 function switchPlayer() {
   currentPlayer = currentPlayer === 0 ? 1 : 0;
@@ -38,7 +42,10 @@ startGame();
 ///////////////////////////
 // USER ROLLS DICE
 btnRoll.addEventListener('click', () => {
+  // dice.classList.remove('hidden');
+  
   if (isOver) return;
+  dice.style.display = 'block'
 
   const diceValue = Math.floor(Math.random() * 6 + 1);
   dice.setAttribute('src', `dice-${diceValue}.png`);
@@ -57,14 +64,13 @@ btnRoll.addEventListener('click', () => {
 ///////////////////////////
 // USER HOLDS SCORE
 btnHold.addEventListener('click', () => {
-  let userScore =
-    +document.querySelector(`#score--${currentPlayer}`).textContent +
-    currentScore;
-  document.querySelector(`#score--${currentPlayer}`).textContent = userScore;
+  scores[currentPlayer] += currentScore
+
+  document.querySelector(`#score--${currentPlayer}`).textContent = scores[currentPlayer];
   currentScore = 0;
   document.querySelector(`#current--${currentPlayer}`).textContent = 0;
 
-  if (userScore >= 100) {
+  if (scores[currentPlayer] >= 100) {
     document
       .querySelector(`.player--${currentPlayer}`)
       .classList.add('player--winner');
