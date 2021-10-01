@@ -333,7 +333,7 @@ class Account {
     this._movements = [];
     this.local = navigator.language;
 
-    console.log(`Thanks for opening an account, ${owner}`);
+    // console.log(`Thanks for opening an account, ${owner}`);
   }
 
   getMovement() {
@@ -361,8 +361,75 @@ class Account {
 }
 
 const acc1 = new Account('Jonas', 'EUR', 1111);
-console.log(acc1);
+// console.log(acc1);
 
-acc1.deposit(250);
-acc1.withdrawal(140);
-console.log(acc1.getMovement());
+// acc1.deposit(250);
+// acc1.withdrawal(140);
+// console.log(acc1.getMovement());
+
+///////////////////////////////////////
+// Coding Challenge #4
+
+/* 
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+class Car {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`${this.make} is accelerating ${this.speed} km\h`);
+    return this;
+  }
+  breake() {
+    this.speed -= 10;
+    console.log(`${this.make} is breaking ${this.speed} km\h`);
+    return this;
+  }
+}
+
+class Ev extends Car {
+  #charge;
+
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    this.#charge -= 1;
+    console.log(
+      `${this.make} is accelerating ${this.speed} km\h and charge is ${
+        this.#charge
+      }`
+    );
+    return this;
+  }
+  chargeBattery(val) {
+    this.#charge = val;
+    console.log(`Charge: ${this.#charge}%`);
+    return this;
+  }
+}
+
+const rivian = new Ev('Rivian', 120, 23);
+console.log(rivian);
+
+rivian
+  .accelerate()
+  .accelerate()
+  .accelerate()
+  .breake()
+  .chargeBattery(70)
+  .accelerate();

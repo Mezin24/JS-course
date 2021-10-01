@@ -136,6 +136,9 @@ nav {
   align-items: center;
   border-bottom: 1px solid #eee;
 }
+.movements__row--red {
+  background-color: orangered;
+}
 
 .movements__type {
   font-size: 1.1rem;
