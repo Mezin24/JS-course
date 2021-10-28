@@ -451,5 +451,36 @@ const { tooMuch, tooLittle } = dogs.reduce(
 );
 const ownersEatTooLittle = tooLittle.flatMap(dog => dog.owners);
 const ownersEatTooMuch = tooMuch.flatMap(dog => dog.owners);
-console.log(ownersEatTooLittle);
-console.log(ownersEatTooMuch);
+// console.log(ownersEatTooLittle);
+// console.log(ownersEatTooMuch);
+
+// 4
+
+// console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
+// console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too much!`);
+
+// 5
+console.log(dogs.find(dog => dog.curFood === dog.recommendedFood) || false);
+console.log(
+  dogs.find(
+    dog =>
+      dog.curFood > dog.recommendedFood * 0.9 &&
+      dog.curFood < dog.recommendedFood * 1.1
+  ) && true
+);
+
+// 7
+
+const dogsOK = dogs.filter(
+  dog =>
+    dog.curFood > dog.recommendedFood * 0.9 &&
+    dog.curFood < dog.recommendedFood * 1.1
+);
+
+console.log(dogsOK);
+
+// 8
+const recomendRating = [...dogs].sort(
+  (a, b) => a.recommendedFood - b.recommendedFood
+);
+console.log(recomendRating);
